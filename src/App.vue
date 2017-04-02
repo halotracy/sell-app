@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-header :seller="seller"></v-header>
+    <v-goods ></v-goods>
     <div class="tab border-1px">
       <div class="tab-item">
         <a v-link="{path:'/goods'}">商品</a>
@@ -18,6 +19,7 @@
 
 <script>
   import header from "./components/header/header.vue";
+  import goods from "./components/goods/goods.vue";
 
   const ERR_OK = 0;
   export default {
@@ -36,7 +38,8 @@
       });
     },
     components: {
-      "v-header": header
+      "v-header": header,
+      "v-goods": goods,
     }
   };
 </script>
