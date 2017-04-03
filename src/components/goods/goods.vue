@@ -1,6 +1,6 @@
 <template >
   <div class="goods">
-    <div class="menu-wrapper">
+    <div class="menu-wrapper" v-el:menu-wrapper>
       <ul>
         <li v-for="item in goods " class="menu-item">
           <span class="text border-1px">
@@ -10,7 +10,7 @@
         </li>
       </ul>
     </div>
-    <div class="foods-wrapper">
+    <div class="foods-wrapper" v-el:foods-wrapper>
       <ul>
         <li v-for="item in goods" class="food-list ">
           <h1 class="title">{{ item.name }}</h1>
@@ -41,6 +41,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import BScroll from 'better-scroll';
 
 const ERR_OK = 0;
 
@@ -61,10 +62,20 @@ export default {
     this.$http.get('api/goods').then((response) => {
         response = response.body;
         if (response.errno == ERR_OK) {
-          this.goods = response.data
+          this.goods = response.data;
           console.log('goods:',this.goods);
+          this.$nextTick(() => {
+            this._initScroll();
+         });
         }
-    })
+    });
+  },
+  methods: {
+    _initScroll() {
+      this.menuScroll = new BScroll(this.$els.menuWrapper, {});
+
+      this.foodsScroll = new BScroll(this.$els.foodsWrapper, {});
+    }
   }
 };
 </script>
@@ -84,6 +95,8 @@ export default {
       flex: 0 0 80px;
       width: 80px;
       background: #f3f5f7;
+
+
       .menu-item
         display: table;
         height: 54px;
@@ -141,36 +154,36 @@ export default {
         .content
             flex: 1;
 
-        .name
-              margin: 2px 0 8px 0;
-              height: 14px;
-              line-height: 14px;
-              font-size: 14px;
-              color: rgb(7,17,27);
+            .name
+                  margin: 2px 0 8px 0;
+                  height: 14px;
+                  line-height: 14px;
+                  font-size: 14px;
+                  color: rgb(7,17,27);
 
-        .desc, .extra
-            font-size: 10px;
-            line-height: 10px;
-            color: rgb(147, 153, 159);
+            .desc, .extra
+                font-size: 10px;
+                line-height: 10px;
+                color: rgb(147, 153, 159);
 
-        .desc
-            margin-bottom: 8px;
+            .desc
+                margin-bottom: 8px;
 
-        .extra
-            &.count
-              margin-right: 12px;
+            .extra
+              &.count
+                margin-right: 12px;
 
-        .price
-          line-height: 24px;
-          font-weight: 700;
-          .now
-             margin-right: 8px;
-             font-size: 14px;
-             color: rgb(240,20,20);
-          .old
-            text-decoration: line-through;
-            font-size: 10px;
-            color: rgb(147,153,159);
+            .price
+              line-height: 24px;
+              font-weight: 700;
+              .now
+                 margin-right: 8px;
+                 font-size: 14px;
+                 color: rgb(240,20,20);
+              .old
+                text-decoration: line-through;
+                font-size: 10px;
+                color: rgb(147,153,159);
 
 
 
