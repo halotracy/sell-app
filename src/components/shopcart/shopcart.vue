@@ -412,8 +412,7 @@ export default {
       &.fade-enter, &.fade-leave
         opacity: 0;
         background: rgba(7,17,27,0);
-        
-           
+                   
 
     
 
