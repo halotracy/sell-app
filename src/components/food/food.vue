@@ -133,8 +133,7 @@ const ALL = 2;
         this.$nextTick(() => {
           this.scroll.refresh();
         })
-      }
-
+      },
     },
     filters: {
       formatDate(time) {
