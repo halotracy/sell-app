@@ -69,6 +69,7 @@
 </template>
 
 <script >
+import {urlParse} from "common/js/util";
 import BScroll from "better-scroll";
 import star from "components/star/star";
 import split from "components/split/split";
@@ -203,7 +204,7 @@ export default {
     .favorite
       position: absolute;
       width: 50px;
-      right: 5px;
+      right: 11px;
       top: 18px;
       text-align: center;
       .icon-favorite
