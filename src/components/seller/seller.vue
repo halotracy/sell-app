@@ -70,6 +70,7 @@
 
 <script >
 import {urlParse} from "common/js/util";
+import {saveToLocal,loadFromLocal} from "common/js/store";
 import BScroll from "better-scroll";
 import star from "components/star/star";
 import split from "components/split/split";
@@ -82,12 +83,14 @@ export default {
   },
   created() {
       this.classMap = ['decrease','discount','special','invoice','guarantee'];
-      console.log("supports", this.seller.supports)
+      //console.log("supports", this.seller.supports)
   },
   data() {
     return {
-      favorite: false
-    }
+      favorite: (() => {
+        return loadFromLocal(this.seller.id,'favorite',false);
+      })()
+    };
   },
   computed: {
     favoriteText() {
@@ -111,6 +114,8 @@ export default {
       }
       //console.log('toggleFavorite')
       this.favorite = !this.favorite;
+      saveToLocal(this.seller.id, 'favorite', this.favorite);
+      console.log('saveToLocal',this.seller.id);
     },
     _initScroll() {
       if(!this.scroll){
